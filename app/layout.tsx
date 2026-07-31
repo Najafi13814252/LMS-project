@@ -48,18 +48,7 @@ export default function RootLayout({
       className={cn("font-sans", arad.variable)}
     >
       <body>
-        <ClerkProvider>
-          <header className="flex justify-end items-center p-4 gap-4">
-            <Show when="signed-out">
-              <SignInButton>ورود</SignInButton>
-              <SignUpButton>
-                <Button>ثبت‌نام</Button>
-              </SignUpButton>
-            </Show>
-            <Show when="signed-in">
-              <UserButton />
-            </Show>
-          </header>
+        <ClerkProvider>          
           {children}
         </ClerkProvider>
       </body>
