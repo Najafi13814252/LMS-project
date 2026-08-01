@@ -1,15 +1,13 @@
 import { prisma } from '@/lib/prisma';
 import { auth } from '@clerk/nextjs/server';
 
-import { NextResponse } from "next/server";
-
 export async function POST(req: Request) {
     try {
         const { userId } = await auth()
         const { title } = await req.json()
 
         if (!userId) {
-            return new NextResponse("Unathorized", { status: 401 })
+            return Response.json("Unauthorized", { status: 401 });
         }
 
         const course = await prisma.course.create({
@@ -19,9 +17,8 @@ export async function POST(req: Request) {
             }
         })
 
-        return NextResponse.json(course)
-    } catch (error) {
-        console.log("COURSES", error);
-        return new NextResponse("Internal Error", { status: 500 })
+        return Response.json(course, {status: 201})
+    } catch {
+        return Response.json("Internal Server Error", { status: 500 })
     }
 }
