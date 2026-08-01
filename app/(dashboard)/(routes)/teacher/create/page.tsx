@@ -13,6 +13,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useTransition } from "react"
 import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 import z from "zod"
 
 function CreateCoursePage() {
@@ -29,16 +30,17 @@ function CreateCoursePage() {
   function onSubmit(values: z.infer<typeof createCourseSchema>) {
     startTransition(async () => {
       try {
-        const response = await axios.post('/api/course', values)
+        const response = await axios.post('/api/courses', values)
         router.push(`/teacher/courses/${response.data.id}`)
+        toast.success("دوره با موفقیت ساخته شد")
       } catch {
-        
+        toast.error("خطا در ساخت دوره")
       }
     })
   }
 
   return (
-    <div className="max-w-5xl mx-auto h-screen flex flex-col md:items-start md:justify-center gap-4 p-6">
+    <div className="max-w-5xl md:w-fit w-full mx-auto h-full flex flex-col md:items-start md:justify-center gap-4 p-6">
       <h1 className="text-2xl">دوره خود را بسازید</h1>
       <p>دوست داری اسم دوره‌ات رو چی بذاری؟ نگران نباش. بعدا میتوانی آن را تغییر دهید.</p>
       <Card className="w-full">

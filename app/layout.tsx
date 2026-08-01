@@ -1,8 +1,8 @@
 import "./globals.css";
 import localFont from 'next/font/local'
 import { cn } from "@/lib/utils";
-import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "react-hot-toast";
 
 const arad = localFont({
   src: [
@@ -48,8 +48,27 @@ export default function RootLayout({
       className={cn("font-sans", arad.variable)}
     >
       <body>
-        <ClerkProvider>          
+        <ClerkProvider>
           {children}
+
+          <Toaster toastOptions={{
+            success: {
+              duration: 4000,
+              style: {
+                border: 'solid 1px oklch(76.8% 0.233 130.85)',
+                color: 'oklch(76.8% 0.233 130.85)',
+                backgroundColor: '#f7fee7'
+              }
+            },
+            error: {
+              duration: 4000,
+              style: {
+                border: 'solid 1px #fb2c36',
+                color: '#fb2c36',
+                backgroundColor: '#fef2f2'
+              }
+            }
+          }} />
         </ClerkProvider>
       </body>
     </html>
