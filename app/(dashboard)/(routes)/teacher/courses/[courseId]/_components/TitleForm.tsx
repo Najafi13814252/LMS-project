@@ -1,15 +1,13 @@
 "use client"
 
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { Button } from "@/components/ui/button"
+import { Field, FieldError, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { createCourseSchema } from "@/schemas/create-course"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Edit, Loader, Pencil } from "@hugeicons/core-free-icons"
+import { Edit, Loader } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import axios from "axios"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState, useTransition } from "react"
 import { Controller, useForm } from "react-hook-form"
@@ -90,38 +88,6 @@ function TitleForm({ initialData, courseId }: TitleFormProps) {
             </Button>
         </form>
       )}
-
-      {/* <Card className="w-full">
-        <CardContent>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <FieldGroup className="gap-y-6">
-              <Controller name="title" control={form.control} render={({ field, fieldState }) => (
-                <Field>
-                  <FieldLabel>عنوان</FieldLabel>
-                  <Input aria-invalid={fieldState.invalid} placeholder="عنوان دوره جدید را وارد کنید..." type="text" {...field} />
-                  {fieldState.invalid && (
-                    <FieldError errors={[fieldState.error]} />
-                  )}
-                </Field>
-              )} />
-
-              <div className=" flex items-center gap-x-2">
-                <Link href="/" className={buttonVariants({ variant: "secondary" })}>لغو</Link>
-                <Button type="submit" className="" disabled={isPending}>
-                  {isPending ? (
-                    <>
-                      <HugeiconsIcon icon={Loader} className="size-4 animate-spin" />
-                      <span>Loading...</span>
-                    </>
-                  ) : (
-                    <span>ساخت دوره</span>
-                  )}
-                </Button>
-              </div>
-            </FieldGroup>
-          </form>
-        </CardContent>
-      </Card> */}
     </div>
   )
 }
