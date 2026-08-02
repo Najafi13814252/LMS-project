@@ -5,6 +5,9 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import { redirect } from "next/navigation"
 import toast from "react-hot-toast"
 import TitleForm from "./_components/TitleForm"
+import DescriptionForm from "./_components/DescriptionForm"
+import ImageForm from "./_components/ImageForm"
+import CategoryForm from "./_components/CategoryForm"
 
 async function Course({ params }: { params: Promise<{ courseId: string }> }) {
   const { courseId } = await params
@@ -24,6 +27,12 @@ async function Course({ params }: { params: Promise<{ courseId: string }> }) {
 
   const course = await prisma.course.findUnique({
     where: { id: courseId }
+  })
+
+  const categories = await prisma.category.findMany({
+    orderBy: {
+      name: "asc"
+    }
   })
 
   if (!course) {
@@ -48,7 +57,7 @@ async function Course({ params }: { params: Promise<{ courseId: string }> }) {
     <div className="p-6">
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-y-2">
-          <h1 className="text-2xl font-medium">راه‌اندازی دوره</h1>
+          <h1 className="text-2xl font-medium">تنظیمات دوره</h1>
           <span className="text-sm text-slate-800 ">{completionText} فیلد تکمیل شده</span>
         </div>
       </div>
@@ -61,6 +70,12 @@ async function Course({ params }: { params: Promise<{ courseId: string }> }) {
             <h2 className="text-xl">دوره خود را شخصی‌سازی کنید</h2>
           </div>
           <TitleForm initialData={course} courseId={course.id}/>
+          <DescriptionForm initialData={course} courseId={course.id}/>
+          <ImageForm initialData={course} courseId={course.id}/>
+          <CategoryForm initialData={course} courseId={course.id} options={categories.map(category => ({
+            label: category.name,
+            value: category.id
+          }))}/>
         </div>
       </div>
     </div>
