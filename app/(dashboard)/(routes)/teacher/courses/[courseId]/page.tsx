@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import { auth } from "@clerk/nextjs/server"
-import { LayoutDashboard } from "@hugeicons/core-free-icons"
+import { DollarSign, File, LayoutDashboard, ListChecks } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { redirect } from "next/navigation"
 import toast from "react-hot-toast"
@@ -8,6 +8,8 @@ import TitleForm from "./_components/TitleForm"
 import DescriptionForm from "./_components/DescriptionForm"
 import ImageForm from "./_components/ImageForm"
 import CategoryForm from "./_components/CategoryForm"
+import PriceForm from "./_components/PriceForm"
+import AttachmentsForm from "./_components/AttachmentsForm"
 
 async function Course({ params }: { params: Promise<{ courseId: string }> }) {
   const { courseId } = await params
@@ -26,7 +28,14 @@ async function Course({ params }: { params: Promise<{ courseId: string }> }) {
   }
 
   const course = await prisma.course.findUnique({
-    where: { id: courseId }
+    where: { id: courseId },
+    include: {
+      attachment: {
+        orderBy: {
+          createdAt: "desc"
+        }
+      }
+    }
   })
 
   const categories = await prisma.category.findMany({
@@ -69,13 +78,48 @@ async function Course({ params }: { params: Promise<{ courseId: string }> }) {
             </div>
             <h2 className="text-xl">دوره خود را شخصی‌سازی کنید</h2>
           </div>
-          <TitleForm initialData={course} courseId={course.id}/>
-          <DescriptionForm initialData={course} courseId={course.id}/>
-          <ImageForm initialData={course} courseId={course.id}/>
+
+          <TitleForm initialData={course} courseId={course.id} />
+          <DescriptionForm initialData={course} courseId={course.id} />
+          <ImageForm initialData={course} courseId={course.id} />
           <CategoryForm initialData={course} courseId={course.id} options={categories.map(category => ({
             label: category.name,
             value: category.id
-          }))}/>
+          }))} />
+        </div>
+
+
+        <div className="space-y-6">
+          <div>
+            <div className="flex items-center gap-x-2">
+              <div className="bg-lime-500/10 p-2 rounded-full">
+                <HugeiconsIcon icon={ListChecks} className="text-lime-600" />
+              </div>
+              <h2 className="text-xl">فصل‌های دوره</h2>
+            </div>
+            <div>
+              TODO
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-x-2">
+              <div className="bg-lime-500/10 p-2 rounded-full">
+                <HugeiconsIcon icon={DollarSign} className="text-lime-600" />
+              </div>
+              <h2 className="text-xl">دوره خود را بفروشید</h2>
+            </div>
+            <PriceForm initialData={course} courseId={course.id} />
+          </div>
+          <div>
+            <div className="flex items-center gap-x-2">
+              <div className="bg-lime-500/10 p-2 rounded-full">
+                <HugeiconsIcon icon={File} className="text-lime-600" />
+              </div>
+              <h2 className="text-xl">منابع و پیوست‌ها</h2>
+            </div>
+            <AttachmentsForm initialData={course} courseId={course.id} />
+          </div>
         </div>
       </div>
     </div>

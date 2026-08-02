@@ -1,11 +1,11 @@
 "use client"
 
-import ComboBox from "@/components/custom/ComboBox"
 import { Button } from "@/components/ui/button"
 import { Field, FieldError, FieldGroup } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 import { Course } from "@/lib/generated/prisma/client"
 import { cn } from "@/lib/utils"
-import { categoryCourseSchema } from "@/schemas/create-course"
+import { priceCourseSchema } from "@/schemas/create-course"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Edit, Loader } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
@@ -16,27 +16,26 @@ import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import z from "zod"
 
-interface CategoryFormProps {
+interface PriceFormProps {
     initialData: Course
     courseId: string
-    options: {label: string, value: string}[]
 }
 
-function CategoryForm({ initialData, courseId, options }: CategoryFormProps) {
+function PriceForm({ initialData, courseId }: PriceFormProps) {
     const [isEditting, setIsEditting] = useState(false)
     const router = useRouter()
 
     const [isPending, startTransition] = useTransition()
     const form = useForm({
-        resolver: zodResolver(categoryCourseSchema),
+        resolver: zodResolver(priceCourseSchema),
         defaultValues: {
-            categoryId: initialData?.categoryId || ""
+            price: initialData?.price || undefined
         }
     })
 
     const toggleEdit = () => setIsEditting(current => !current)
 
-    function onSubmit(values: z.infer<typeof categoryCourseSchema>) {
+    function onSubmit(values: z.infer<typeof priceCourseSchema>) {
         startTransition(async () => {
             try {
                 await axios.patch(`/api/courses/${courseId}`, values)
@@ -48,38 +47,35 @@ function CategoryForm({ initialData, courseId, options }: CategoryFormProps) {
             }
         })
     }
-
-    const selectedOption = options.find(option => option.value === initialData.categoryId)
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                دسته‌بندی دوره
+                قیمت دوره
                 <Button variant="ghost" onClick={toggleEdit}>
                     {isEditting ? (
                         <>لغو</>
                     ) : (
                         <>
                             <HugeiconsIcon icon={Edit} className="h-4 w-4" />
-                            ویرایش دسته‌بندی
+                            ویرایش قیمت
                         </>
                     )}
                 </Button>
             </div>
             {!isEditting ? (
                 <p className={cn("text-sm mt-2",
-                    !initialData.categoryId && "text-slate-500 italic")}>
-                    {selectedOption?.label || 'دسته‌بندی انتخاب نشده'}
+                    !initialData.price && "text-slate-500 italic")}>
+                    {`${initialData.price?.toLocaleString('fa-ir')} تومان` || 'قیمتی تایین نشده است'}
                 </p>
             ) : (
                 <form onSubmit={form.handleSubmit(onSubmit)} className="mt-2">
                     <FieldGroup>
-                        <Controller name="categoryId" control={form.control} render={({ field, fieldState }) => (
+                        <Controller name="price" control={form.control} render={({ field, fieldState }) => (
                             <Field>
-                                 <ComboBox {...field} options={options}/>
+                                <Input aria-invalid={fieldState.invalid} placeholder="عنوان جدید دوره را وارد کنید..." type="number" min={0} {...field} className="bg-white" />
                                 {fieldState.invalid && (
                                     <FieldError errors={[fieldState.error]} />
                                 )}
-                               
                             </Field>
                         )} />
                     </FieldGroup>
@@ -99,4 +95,4 @@ function CategoryForm({ initialData, courseId, options }: CategoryFormProps) {
     )
 }
 
-export default CategoryForm
+export default PriceForm

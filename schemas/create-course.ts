@@ -15,3 +15,11 @@ export const imageCourseSchema = z.object({
 export const categoryCourseSchema = z.object({
     categoryId: z.string().min(1) 
 })
+
+export const priceCourseSchema = z.object({
+    price: z.coerce.number()
+})
+
+export const attachmentCourseSchema = z.object({
+    url: z.string().min(1)
+})
