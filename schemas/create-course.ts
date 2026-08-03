@@ -23,3 +23,7 @@ export const priceCourseSchema = z.object({
 export const attachmentCourseSchema = z.object({
     url: z.string().min(1)
 })
+
+export const chapterCourseSchema = z.object({
+    title: z.string().min(1)
+})

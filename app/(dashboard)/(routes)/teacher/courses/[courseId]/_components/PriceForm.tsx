@@ -65,7 +65,7 @@ function PriceForm({ initialData, courseId }: PriceFormProps) {
             {!isEditting ? (
                 <p className={cn("text-sm mt-2",
                     !initialData.price && "text-slate-500 italic")}>
-                    {`${initialData.price?.toLocaleString('fa-ir')} تومان` || 'قیمتی تایین نشده است'}
+                    {(initialData.price !== null ? `${initialData.price?.toLocaleString('fa-ir')} تومان` : initialData.price) || 'قیمتی تایین نشده است'}
                 </p>
             ) : (
                 <form onSubmit={form.handleSubmit(onSubmit)} className="mt-2">

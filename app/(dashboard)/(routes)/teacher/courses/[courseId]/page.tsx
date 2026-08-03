@@ -10,6 +10,7 @@ import ImageForm from "./_components/ImageForm"
 import CategoryForm from "./_components/CategoryForm"
 import PriceForm from "./_components/PriceForm"
 import AttachmentsForm from "./_components/AttachmentsForm"
+import ChaptersForm from "./_components/ChaptersForm"
 
 async function Course({ params }: { params: Promise<{ courseId: string }> }) {
   const { courseId } = await params
@@ -28,8 +29,13 @@ async function Course({ params }: { params: Promise<{ courseId: string }> }) {
   }
 
   const course = await prisma.course.findUnique({
-    where: { id: courseId },
+    where: { id: courseId, userId },
     include: {
+      chapters: {
+        orderBy: {
+          position:'asc'
+        }
+      },
       attachment: {
         orderBy: {
           createdAt: "desc"
@@ -53,7 +59,8 @@ async function Course({ params }: { params: Promise<{ courseId: string }> }) {
     course.description,
     course.imageUrl,
     course.price,
-    course.categoryId
+    course.categoryId,
+    course.chapters.some(chapter => chapter.isPublished)
   ]
 
   const totalFields = requiredFields.length
@@ -97,9 +104,7 @@ async function Course({ params }: { params: Promise<{ courseId: string }> }) {
               </div>
               <h2 className="text-xl">فصل‌های دوره</h2>
             </div>
-            <div>
-              TODO
-            </div>
+            <ChaptersForm initialData={course} courseId={course.id} />
           </div>
 
           <div>
