@@ -3,7 +3,6 @@ import { auth } from "@clerk/nextjs/server"
 import { DollarSign, File, LayoutDashboard, ListChecks } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { redirect } from "next/navigation"
-import toast from "react-hot-toast"
 import TitleForm from "./_components/TitleForm"
 import DescriptionForm from "./_components/DescriptionForm"
 import ImageForm from "./_components/ImageForm"
@@ -18,13 +17,6 @@ async function Course({ params }: { params: Promise<{ courseId: string }> }) {
   const { userId } = await auth()
 
   if (!userId) {
-    toast("وارد حساب کاربری خود شوید", {
-      style: {
-        background: "#fefce8",
-        border: "1px solid oklch(68.1% 0.162 75.834)",
-        color: "oklch(68.1% 0.162 75.834)"
-      }
-    })
     return redirect("/")
   }
 

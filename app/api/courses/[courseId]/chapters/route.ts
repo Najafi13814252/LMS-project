@@ -7,10 +7,13 @@ export async function POST(req: Request, { params }: { params: Promise<{ courseI
         const { courseId } = await params
         const { title } = await req.json()
 
+        // چک وجود کاربر 
         if (!userId) {
             return Response.json("Unauthorized", { status: 401 });
         }
 
+        // چک مالکیت دوره (کدام دوره و برای چه کاربری است؟) 
+        // چک وجود دوره 
         const courseOwner = await prisma.course.findUnique({
             where: {
                 id: courseId,
@@ -22,6 +25,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ courseI
             return Response.json("Unauthorized", { status: 401 });
         }
 
+        // محاسبه موقعیت آخرین فصل 
         const lastChapter = await prisma.chapter.findFirst({
             where: {
                 courseId
@@ -31,6 +35,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ courseI
             }
         })
 
+        //برای اینکه فصل جدید همیشه در انتهای لیست بیاید 
         const newPosition = lastChapter ? lastChapter.position + 1 : 1
 
         const chapter = await prisma.chapter.create({
