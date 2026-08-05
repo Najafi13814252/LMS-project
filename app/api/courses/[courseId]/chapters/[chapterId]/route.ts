@@ -5,7 +5,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ course
     try {
         const { userId } = await auth()
         const { courseId, chapterId } = await params
-        const {isPublished, ...values} = await req.json()
+        const values = await req.json()
 
         if (!userId) {
             return Response.json("Unauthorized", { status: 401 });

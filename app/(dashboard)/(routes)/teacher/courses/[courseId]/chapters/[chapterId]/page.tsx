@@ -1,12 +1,14 @@
 import { buttonVariants } from "@/components/ui/button"
 import { prisma } from "@/lib/prisma"
 import { auth } from "@clerk/nextjs/server"
-import { ArrowRight, LayoutDashboard } from "@hugeicons/core-free-icons"
+import { ArrowRight, Eye, LayoutDashboard, Video } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import ChapterTitleForm from "./_components/ChapterTitleForm"
 import ChapterDescriptionForm from "./_components/ChapterDescriptionForm"
+import ChapterAccessForm from "./_components/ChapterAccessForm"
+import ChapterVideoForm from "./_components/ChapterVideoFrom"
 
 async function Chapter({ params }: { params: Promise<{ courseId: string, chapterId: string }> }) {
     const { chapterId, courseId } = await params
@@ -55,7 +57,7 @@ async function Chapter({ params }: { params: Promise<{ courseId: string, chapter
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
-                <div>
+                <div className="space-y-6">
                     <div className="flex items-center gap-x-2">
                         <div className="bg-lime-500/10 p-2 rounded-full">
                             <HugeiconsIcon icon={LayoutDashboard} className="text-lime-600" />
@@ -65,7 +67,25 @@ async function Chapter({ params }: { params: Promise<{ courseId: string, chapter
 
                     <ChapterTitleForm initialData={chapter} chapterId={chapterId} courseId={courseId} />
                     <ChapterDescriptionForm initialData={chapter} courseId={courseId} chapterId={chapterId} />
-                    {/* <ImageForm initialData={chapter} courseId={chapter.id} /> */}
+                    <div>
+                        <div className="flex items-center gap-x-2">
+                            <div className="bg-lime-500/10 p-2 rounded-full">
+                                <HugeiconsIcon icon={Eye} className="text-lime-600" />
+                            </div>
+                            <h2 className="text-xl">تنظیمات دسترسی</h2>
+                        </div>
+                        <ChapterAccessForm initialData={chapter} courseId={courseId} chapterId={chapterId} />
+                    </div>
+                </div>
+
+                <div>
+                    <div className="flex items-center gap-x-2">
+                        <div className="bg-lime-500/10 p-2 rounded-full">
+                            <HugeiconsIcon icon={Video} className="text-lime-600" />
+                        </div>
+                        <h2 className="text-xl">افزودن ویدئو</h2>
+                    </div>
+                    <ChapterVideoForm initialData={chapter} courseId={courseId} chapterId={chapterId} />
                 </div>
             </div>
         </div>

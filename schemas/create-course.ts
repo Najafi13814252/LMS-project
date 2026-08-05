@@ -17,7 +17,7 @@ export const categoryCourseSchema = z.object({
 })
 
 export const priceCourseSchema = z.object({
-    price: z.coerce.number()
+    price: z.union([z.string(), z.number()]).pipe(z.coerce.number())
 })
 
 export const attachmentCourseSchema = z.object({
@@ -26,4 +26,12 @@ export const attachmentCourseSchema = z.object({
 
 export const chapterCourseSchema = z.object({
     title: z.string().min(1)
+})
+
+export const chapterAccessSchema = z.object({
+    isFree: z.boolean().default(false)
+})
+
+export const chapterVideoSchema = z.object({
+    videoUrl: z.string().min(1, "ویدئو الزامی میباشد") 
 })
