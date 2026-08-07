@@ -401,7 +401,6 @@ export const ModelName = {
   Course: 'Course',
   Attachment: 'Attachment',
   Chapter: 'Chapter',
-  MuxData: 'MuxData',
   UserProgress: 'UserProgress',
   Purchase: 'Purchase',
   StripeCustomer: 'StripeCustomer'
@@ -420,7 +419,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "category" | "course" | "attachment" | "chapter" | "muxData" | "userProgress" | "purchase" | "stripeCustomer"
+    modelProps: "category" | "course" | "attachment" | "chapter" | "userProgress" | "purchase" | "stripeCustomer"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -685,72 +684,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ChapterCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ChapterCountAggregateOutputType> | number
-        }
-      }
-    }
-    MuxData: {
-      payload: Prisma.$MuxDataPayload<ExtArgs>
-      fields: Prisma.MuxDataFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.MuxDataFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MuxDataPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.MuxDataFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MuxDataPayload>
-        }
-        findFirst: {
-          args: Prisma.MuxDataFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MuxDataPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.MuxDataFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MuxDataPayload>
-        }
-        findMany: {
-          args: Prisma.MuxDataFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MuxDataPayload>[]
-        }
-        create: {
-          args: Prisma.MuxDataCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MuxDataPayload>
-        }
-        createMany: {
-          args: Prisma.MuxDataCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        delete: {
-          args: Prisma.MuxDataDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MuxDataPayload>
-        }
-        update: {
-          args: Prisma.MuxDataUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MuxDataPayload>
-        }
-        deleteMany: {
-          args: Prisma.MuxDataDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.MuxDataUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        upsert: {
-          args: Prisma.MuxDataUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MuxDataPayload>
-        }
-        aggregate: {
-          args: Prisma.MuxDataAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateMuxData>
-        }
-        groupBy: {
-          args: Prisma.MuxDataGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.MuxDataGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.MuxDataCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.MuxDataCountAggregateOutputType> | number
         }
       }
     }
@@ -1043,16 +976,6 @@ export const ChapterScalarFieldEnum = {
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
 
 
-export const MuxDataScalarFieldEnum = {
-  id: 'id',
-  assetId: 'assetId',
-  playbackId: 'playbackId',
-  chapterId: 'chapterId'
-} as const
-
-export type MuxDataScalarFieldEnum = (typeof MuxDataScalarFieldEnum)[keyof typeof MuxDataScalarFieldEnum]
-
-
 export const UserProgressScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -1142,16 +1065,6 @@ export const ChapterOrderByRelevanceFieldEnum = {
 } as const
 
 export type ChapterOrderByRelevanceFieldEnum = (typeof ChapterOrderByRelevanceFieldEnum)[keyof typeof ChapterOrderByRelevanceFieldEnum]
-
-
-export const MuxDataOrderByRelevanceFieldEnum = {
-  id: 'id',
-  assetId: 'assetId',
-  playbackId: 'playbackId',
-  chapterId: 'chapterId'
-} as const
-
-export type MuxDataOrderByRelevanceFieldEnum = (typeof MuxDataOrderByRelevanceFieldEnum)[keyof typeof MuxDataOrderByRelevanceFieldEnum]
 
 
 export const UserProgressOrderByRelevanceFieldEnum = {
@@ -1376,7 +1289,6 @@ export type GlobalOmitConfig = {
   course?: Prisma.CourseOmit
   attachment?: Prisma.AttachmentOmit
   chapter?: Prisma.ChapterOmit
-  muxData?: Prisma.MuxDataOmit
   userProgress?: Prisma.UserProgressOmit
   purchase?: Prisma.PurchaseOmit
   stripeCustomer?: Prisma.StripeCustomerOmit

@@ -38,11 +38,6 @@ export type Attachment = Prisma.AttachmentModel
  */
 export type Chapter = Prisma.ChapterModel
 /**
- * Model MuxData
- * 
- */
-export type MuxData = Prisma.MuxDataModel
-/**
  * Model UserProgress
  * 
  */

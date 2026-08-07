@@ -19,21 +19,10 @@ CREATE TABLE `Chapter` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `MuxData` (
-    `id` VARCHAR(191) NOT NULL,
-    `assetId` VARCHAR(191) NOT NULL,
-    `playbackId` VARCHAR(191) NULL,
-    `chapterId` VARCHAR(191) NOT NULL,
-
-    UNIQUE INDEX `MuxData_chapterId_key`(`chapterId`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `UserProgress` (
     `id` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-    `chapterId` VARCHAR(191) NOT NULL,
+    `userId` VARCHAR(100) NOT NULL,
+    `chapterId` VARCHAR(100) NOT NULL,
     `isComplated` BOOLEAN NOT NULL DEFAULT false,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updateAt` DATETIME(3) NOT NULL,
@@ -76,9 +65,6 @@ ALTER TABLE `Attachment` ADD CONSTRAINT `Attachment_courseId_fkey` FOREIGN KEY (
 
 -- AddForeignKey
 ALTER TABLE `Chapter` ADD CONSTRAINT `Chapter_courseId_fkey` FOREIGN KEY (`courseId`) REFERENCES `Course`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `MuxData` ADD CONSTRAINT `MuxData_chapterId_fkey` FOREIGN KEY (`chapterId`) REFERENCES `Chapter`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `UserProgress` ADD CONSTRAINT `UserProgress_chapterId_fkey` FOREIGN KEY (`chapterId`) REFERENCES `Chapter`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

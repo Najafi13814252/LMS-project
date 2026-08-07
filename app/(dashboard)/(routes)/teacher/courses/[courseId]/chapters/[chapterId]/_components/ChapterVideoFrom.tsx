@@ -84,7 +84,7 @@ function ChapterVideoForm({ initialData, courseId, chapterId }: ChapterVideoForm
                 </div>
             )}
             {initialData.videoUrl && !isEditting && (
-                <div className="text-xs text-muted-foreground mt-2">پردازش ویدئو‌ها میتواند چند دقیقه طول بکشد. اگر ویدئو ظاهر نشد صفحه را refresh کنید</div>
+                <div className="text-xs text-muted-foreground mt-4">پردازش ویدئو‌ها میتواند چند دقیقه طول بکشد. اگر ویدئو ظاهر نشد صفحه را refresh کنید</div>
             )}
         </div>
     )

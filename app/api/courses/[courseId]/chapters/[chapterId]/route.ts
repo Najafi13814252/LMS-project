@@ -37,3 +37,64 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ course
         return Response.json("Internal Server Error", { status: 500 })
     }
 }
+
+export async function DELETE(req: Request, { params }: { params: Promise<{ courseId: string, chapterId: string }> }) {
+    try {
+        const { userId } = await auth()
+        const { courseId, chapterId } = await params
+
+        if (!userId) {
+            return Response.json("Unauthorized", { status: 401 });
+        }
+
+        const courseOwner = await prisma.course.findUnique({
+            where: {
+                id: courseId,
+                userId
+            }
+        })
+
+        if (!courseOwner) {
+            return Response.json("Unauthorized", { status: 401 });
+        }
+
+        const chapter = await prisma.chapter.findUnique({
+            where: {
+                id: chapterId,
+                courseId
+            }
+        })
+
+        if (!chapter) {
+            return Response.json("Not Found", { status: 404 })
+        }
+
+        const deletedChapter = await prisma.chapter.delete({
+            where: {
+                id: chapterId
+            }
+        })
+
+        const publishedChaptersInCourse = await prisma.chapter.findMany({
+            where: {
+                courseId,
+                isPublished: true
+            }
+        })
+
+        if (!publishedChaptersInCourse.length) {
+            await prisma.course.update({
+                where: {
+                    id: courseId
+                },
+                data: {
+                    isPublished: false
+                }
+            })
+        }
+
+        return Response.json(deletedChapter, { status: 200 })
+    } catch {
+        return Response.json("Internal Server Error", { status: 500 })
+    }
+}

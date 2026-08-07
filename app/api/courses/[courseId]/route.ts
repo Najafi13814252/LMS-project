@@ -26,3 +26,35 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ course
         return Response.json("Internal Server Error", { status: 500 })
     }
 }
+
+export async function DELETE(req: Request, { params }: { params: Promise<{ courseId: string }> }) {
+    try {
+        const { userId } = await auth()
+        const { courseId } = await params
+
+        if (!userId) {
+            return Response.json("Unauthorized", { status: 401 });
+        }
+
+        const courseOwner = await prisma.course.findUnique({
+            where: {
+                id: courseId,
+                userId
+            }
+        })
+
+        if (!courseOwner) {
+            return Response.json("Unauthorized", { status: 401 });
+        }
+
+        const deletedCourse = await prisma.course.delete({
+            where: {
+                id: courseId
+            }
+        })
+
+        return Response.json(deletedCourse, { status: 200 })
+    } catch {
+        return Response.json("Internal Server Error", { status: 500 })
+    }
+}

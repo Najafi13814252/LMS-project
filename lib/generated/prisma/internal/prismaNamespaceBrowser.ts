@@ -55,7 +55,6 @@ export const ModelName = {
   Course: 'Course',
   Attachment: 'Attachment',
   Chapter: 'Chapter',
-  MuxData: 'MuxData',
   UserProgress: 'UserProgress',
   Purchase: 'Purchase',
   StripeCustomer: 'StripeCustomer'
@@ -127,16 +126,6 @@ export const ChapterScalarFieldEnum = {
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
-
-
-export const MuxDataScalarFieldEnum = {
-  id: 'id',
-  assetId: 'assetId',
-  playbackId: 'playbackId',
-  chapterId: 'chapterId'
-} as const
-
-export type MuxDataScalarFieldEnum = (typeof MuxDataScalarFieldEnum)[keyof typeof MuxDataScalarFieldEnum]
 
 
 export const UserProgressScalarFieldEnum = {
@@ -228,16 +217,6 @@ export const ChapterOrderByRelevanceFieldEnum = {
 } as const
 
 export type ChapterOrderByRelevanceFieldEnum = (typeof ChapterOrderByRelevanceFieldEnum)[keyof typeof ChapterOrderByRelevanceFieldEnum]
-
-
-export const MuxDataOrderByRelevanceFieldEnum = {
-  id: 'id',
-  assetId: 'assetId',
-  playbackId: 'playbackId',
-  chapterId: 'chapterId'
-} as const
-
-export type MuxDataOrderByRelevanceFieldEnum = (typeof MuxDataOrderByRelevanceFieldEnum)[keyof typeof MuxDataOrderByRelevanceFieldEnum]
 
 
 export const UserProgressOrderByRelevanceFieldEnum = {

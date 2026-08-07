@@ -9,6 +9,8 @@ import ChapterTitleForm from "./_components/ChapterTitleForm"
 import ChapterDescriptionForm from "./_components/ChapterDescriptionForm"
 import ChapterAccessForm from "./_components/ChapterAccessForm"
 import ChapterVideoForm from "./_components/ChapterVideoFrom"
+import Banner from "@/components/custom/Banner"
+import ChapterActions from "./_components/ChapterActions"
 
 async function Chapter({ params }: { params: Promise<{ courseId: string, chapterId: string }> }) {
     const { chapterId, courseId } = await params
@@ -20,10 +22,7 @@ async function Chapter({ params }: { params: Promise<{ courseId: string, chapter
     }
 
     const chapter = await prisma.chapter.findUnique({
-        where: { id: chapterId, courseId },
-        include: {
-            muxData: true
-        }
+        where: { id: chapterId, courseId }
     })
 
     if (!chapter) {
@@ -41,54 +40,60 @@ async function Chapter({ params }: { params: Promise<{ courseId: string, chapter
 
     const completionText = `(${completedFields} / ${totalFields})`
 
+    const isComplate = requiredFields.every(Boolean)
+
     return (
-        <div className="p-6">
-            <div className="w-full">
-                <Link href={`/teacher/courses/${courseId}`} className={buttonVariants({ variant: "secondary" })}>
-                    <HugeiconsIcon icon={ArrowRight} className="w-4 h-4" />
-                    بازگشت به تنظیمات دوره
-                </Link>
-                <div className="flex items-center justify-between w-full mt-6">
-                    <div className="flex flex-col gap-y-2">
-                        <h1 className="text-2xl font-medium">تنظیمات فصل دوره</h1>
-                        <span className="text-sm text-slate-800 ">{completionText} فیلد تکمیل شده</span>
+        <>
+            {!chapter.isPublished && (<Banner variant="warning" label="این فصل منتشر نشده است و در دوره قابل مشاهده نخواهد بود" />)}
+            <div className="p-6">
+                <div className="w-full">
+                    <Link href={`/teacher/courses/${courseId}`} className={buttonVariants({ variant: "secondary" })}>
+                        <HugeiconsIcon icon={ArrowRight} className="w-4 h-4" />
+                        بازگشت به تنظیمات دوره
+                    </Link>
+                    <div className="flex items-center justify-between w-full mt-6">
+                        <div className="flex flex-col gap-y-2">
+                            <h1 className="text-2xl font-medium">تنظیمات فصل دوره</h1>
+                            <span className="text-sm text-slate-800 ">{completionText} فیلد تکمیل شده</span>
+                        </div>
+                        <ChapterActions disabled={!isComplate} chapterId={chapterId} courseId={courseId} isPublished={chapter.isPublished} />
                     </div>
                 </div>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
-                <div className="space-y-6">
-                    <div className="flex items-center gap-x-2">
-                        <div className="bg-lime-500/10 p-2 rounded-full">
-                            <HugeiconsIcon icon={LayoutDashboard} className="text-lime-600" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+                    <div className="space-y-6">
+                        <div className="flex items-center gap-x-2">
+                            <div className="bg-lime-500/10 p-2 rounded-full">
+                                <HugeiconsIcon icon={LayoutDashboard} className="text-lime-600" />
+                            </div>
+                            <h2 className="text-xl">فصل خود را شخصی‌سازی کنید</h2>
                         </div>
-                        <h2 className="text-xl">فصل خود را شخصی‌سازی کنید</h2>
+
+                        <ChapterTitleForm initialData={chapter} chapterId={chapterId} courseId={courseId} />
+                        <ChapterDescriptionForm initialData={chapter} courseId={courseId} chapterId={chapterId} />
+                        <div>
+                            <div className="flex items-center gap-x-2">
+                                <div className="bg-lime-500/10 p-2 rounded-full">
+                                    <HugeiconsIcon icon={Eye} className="text-lime-600" />
+                                </div>
+                                <h2 className="text-xl">تنظیمات دسترسی</h2>
+                            </div>
+                            <ChapterAccessForm initialData={chapter} courseId={courseId} chapterId={chapterId} />
+                        </div>
                     </div>
 
-                    <ChapterTitleForm initialData={chapter} chapterId={chapterId} courseId={courseId} />
-                    <ChapterDescriptionForm initialData={chapter} courseId={courseId} chapterId={chapterId} />
                     <div>
                         <div className="flex items-center gap-x-2">
                             <div className="bg-lime-500/10 p-2 rounded-full">
-                                <HugeiconsIcon icon={Eye} className="text-lime-600" />
+                                <HugeiconsIcon icon={Video} className="text-lime-600" />
                             </div>
-                            <h2 className="text-xl">تنظیمات دسترسی</h2>
+                            <h2 className="text-xl">افزودن ویدئو</h2>
                         </div>
-                        <ChapterAccessForm initialData={chapter} courseId={courseId} chapterId={chapterId} />
+                        <ChapterVideoForm initialData={chapter} courseId={courseId} chapterId={chapterId} />
                     </div>
-                </div>
-
-                <div>
-                    <div className="flex items-center gap-x-2">
-                        <div className="bg-lime-500/10 p-2 rounded-full">
-                            <HugeiconsIcon icon={Video} className="text-lime-600" />
-                        </div>
-                        <h2 className="text-xl">افزودن ویدئو</h2>
-                    </div>
-                    <ChapterVideoForm initialData={chapter} courseId={courseId} chapterId={chapterId} />
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

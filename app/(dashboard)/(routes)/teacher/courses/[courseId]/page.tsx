@@ -10,6 +10,8 @@ import CategoryForm from "./_components/CategoryForm"
 import PriceForm from "./_components/PriceForm"
 import AttachmentsForm from "./_components/AttachmentsForm"
 import ChaptersForm from "./_components/ChaptersForm"
+import Banner from "@/components/custom/Banner"
+import CourseActions from "./_components/CourseAction"
 
 async function Course({ params }: { params: Promise<{ courseId: string }> }) {
   const { courseId } = await params
@@ -25,7 +27,7 @@ async function Course({ params }: { params: Promise<{ courseId: string }> }) {
     include: {
       chapters: {
         orderBy: {
-          position:'asc'
+          position: 'asc'
         }
       },
       attachment: {
@@ -60,66 +62,74 @@ async function Course({ params }: { params: Promise<{ courseId: string }> }) {
 
   const completionText = `(${completedFields} / ${totalFields})`
 
+  const isComplate = requiredFields.every(Boolean)
 
   return (
-    <div className="p-6">
-      <div className="flex items-center justify-between">
-        <div className="flex flex-col gap-y-2">
-          <h1 className="text-2xl font-medium">تنظیمات دوره</h1>
-          <span className="text-sm text-slate-800 ">{completionText} فیلد تکمیل شده</span>
+    <>
+      {!course.isPublished && (<Banner variant="warning" label="این دوره منتشر نشده است و برای دانشجوها قابل مشاهده نخواهد بود" />)}
+      <div className="p-6">
+        <div className="w-full">
+          <div className="flex items-center justify-between w-full mt-6">
+            <div className="flex flex-col gap-y-2">
+              <h1 className="text-2xl font-medium">تنظیمات فصل دوره</h1>
+              <span className="text-sm text-slate-800 ">{completionText} فیلد تکمیل شده</span>
+            </div>
+            <CourseActions disabled={!isComplate || false} courseId={courseId} isPublished={course.isPublished} />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+          <div>
+            <div className="flex items-center gap-x-2">
+              <div className="bg-lime-500/10 p-2 rounded-full">
+                <HugeiconsIcon icon={LayoutDashboard} className="text-lime-600" />
+              </div>
+              <h2 className="text-xl">دوره خود را شخصی‌سازی کنید</h2>
+            </div>
+
+            <TitleForm initialData={course} courseId={course.id} />
+            <DescriptionForm initialData={course} courseId={course.id} />
+            <ImageForm initialData={course} courseId={course.id} />
+            <CategoryForm initialData={course} courseId={course.id} options={categories.map(category => ({
+              label: category.name,
+              value: category.id
+            }))} />
+          </div>
+
+
+          <div className="space-y-6">
+            <div>
+              <div className="flex items-center gap-x-2">
+                <div className="bg-lime-500/10 p-2 rounded-full">
+                  <HugeiconsIcon icon={ListChecks} className="text-lime-600" />
+                </div>
+                <h2 className="text-xl">فصل‌های دوره</h2>
+              </div>
+              <ChaptersForm initialData={course} courseId={course.id} />
+            </div>
+
+            <div>
+              <div className="flex items-center gap-x-2">
+                <div className="bg-lime-500/10 p-2 rounded-full">
+                  <HugeiconsIcon icon={DollarSign} className="text-lime-600" />
+                </div>
+                <h2 className="text-xl">دوره خود را بفروشید</h2>
+              </div>
+              <PriceForm initialData={course} courseId={course.id} />
+            </div>
+            <div>
+              <div className="flex items-center gap-x-2">
+                <div className="bg-lime-500/10 p-2 rounded-full">
+                  <HugeiconsIcon icon={File} className="text-lime-600" />
+                </div>
+                <h2 className="text-xl">منابع و پیوست‌ها</h2>
+              </div>
+              <AttachmentsForm initialData={course} courseId={course.id} />
+            </div>
+          </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
-        <div>
-          <div className="flex items-center gap-x-2">
-            <div className="bg-lime-500/10 p-2 rounded-full">
-              <HugeiconsIcon icon={LayoutDashboard} className="text-lime-600" />
-            </div>
-            <h2 className="text-xl">دوره خود را شخصی‌سازی کنید</h2>
-          </div>
-
-          <TitleForm initialData={course} courseId={course.id} />
-          <DescriptionForm initialData={course} courseId={course.id} />
-          <ImageForm initialData={course} courseId={course.id} />
-          <CategoryForm initialData={course} courseId={course.id} options={categories.map(category => ({
-            label: category.name,
-            value: category.id
-          }))} />
-        </div>
-
-
-        <div className="space-y-6">
-          <div>
-            <div className="flex items-center gap-x-2">
-              <div className="bg-lime-500/10 p-2 rounded-full">
-                <HugeiconsIcon icon={ListChecks} className="text-lime-600" />
-              </div>
-              <h2 className="text-xl">فصل‌های دوره</h2>
-            </div>
-            <ChaptersForm initialData={course} courseId={course.id} />
-          </div>
-
-          <div>
-            <div className="flex items-center gap-x-2">
-              <div className="bg-lime-500/10 p-2 rounded-full">
-                <HugeiconsIcon icon={DollarSign} className="text-lime-600" />
-              </div>
-              <h2 className="text-xl">دوره خود را بفروشید</h2>
-            </div>
-            <PriceForm initialData={course} courseId={course.id} />
-          </div>
-          <div>
-            <div className="flex items-center gap-x-2">
-              <div className="bg-lime-500/10 p-2 rounded-full">
-                <HugeiconsIcon icon={File} className="text-lime-600" />
-              </div>
-              <h2 className="text-xl">منابع و پیوست‌ها</h2>
-            </div>
-            <AttachmentsForm initialData={course} courseId={course.id} />
-          </div>
-        </div>
-      </div>
-    </div>
+    </>
   )
 }
 
