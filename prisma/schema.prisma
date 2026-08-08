@@ -90,14 +90,15 @@ model UserProgress {
 
 model Purchase {
   id     String @id @default(uuid())
-  userId String
+  userId String @db.VarChar(100)
 
-  courseId String
+  courseId String @db.VarChar(100)
   course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
 
+  @@unique([userId, courseId])
   @@index([courseId])
 }
 

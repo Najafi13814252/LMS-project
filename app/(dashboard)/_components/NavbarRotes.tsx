@@ -12,7 +12,7 @@ function NavbarRotes() {
     const pathname = usePathname()
 
     const isTeacherPage = pathname?.startsWith('/teacher')
-    const isPlayerPage = pathname?.startsWith('/chapter')
+    const isCoursePage = pathname?.startsWith('/courses')
     const isSearchPage = pathname === "/search"
 
     return (
@@ -25,7 +25,7 @@ function NavbarRotes() {
 
 
             <div className="flex items-center gap-x-2 mr-auto">
-                {isTeacherPage || isPlayerPage ? (
+                {isTeacherPage || isCoursePage ? (
                     <Link href="/" className={buttonVariants({ variant: "ghost" })}>
                         <HugeiconsIcon icon={Logout} className="h-4 w-4" />
                         خروج
