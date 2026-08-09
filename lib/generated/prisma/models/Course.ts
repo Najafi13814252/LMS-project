@@ -260,6 +260,7 @@ export type CourseWhereInput = {
   chapters?: Prisma.ChapterListRelationFilter
   attachment?: Prisma.AttachmentListRelationFilter
   purchases?: Prisma.PurchaseListRelationFilter
+  payments?: Prisma.PaymentListRelationFilter
 }
 
 export type CourseOrderByWithRelationInput = {
@@ -277,6 +278,7 @@ export type CourseOrderByWithRelationInput = {
   chapters?: Prisma.ChapterOrderByRelationAggregateInput
   attachment?: Prisma.AttachmentOrderByRelationAggregateInput
   purchases?: Prisma.PurchaseOrderByRelationAggregateInput
+  payments?: Prisma.PaymentOrderByRelationAggregateInput
   _relevance?: Prisma.CourseOrderByRelevanceInput
 }
 
@@ -298,6 +300,7 @@ export type CourseWhereUniqueInput = Prisma.AtLeast<{
   chapters?: Prisma.ChapterListRelationFilter
   attachment?: Prisma.AttachmentListRelationFilter
   purchases?: Prisma.PurchaseListRelationFilter
+  payments?: Prisma.PaymentListRelationFilter
 }, "id">
 
 export type CourseOrderByWithAggregationInput = {
@@ -348,6 +351,7 @@ export type CourseCreateInput = {
   chapters?: Prisma.ChapterCreateNestedManyWithoutCourseInput
   attachment?: Prisma.AttachmentCreateNestedManyWithoutCourseInput
   purchases?: Prisma.PurchaseCreateNestedManyWithoutCourseInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCourseInput
 }
 
 export type CourseUncheckedCreateInput = {
@@ -364,6 +368,7 @@ export type CourseUncheckedCreateInput = {
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutCourseInput
   attachment?: Prisma.AttachmentUncheckedCreateNestedManyWithoutCourseInput
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutCourseInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCourseInput
 }
 
 export type CourseUpdateInput = {
@@ -380,6 +385,7 @@ export type CourseUpdateInput = {
   chapters?: Prisma.ChapterUpdateManyWithoutCourseNestedInput
   attachment?: Prisma.AttachmentUpdateManyWithoutCourseNestedInput
   purchases?: Prisma.PurchaseUpdateManyWithoutCourseNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseUncheckedUpdateInput = {
@@ -396,6 +402,7 @@ export type CourseUncheckedUpdateInput = {
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutCourseNestedInput
   attachment?: Prisma.AttachmentUncheckedUpdateManyWithoutCourseNestedInput
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutCourseNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseCreateManyInput = {
@@ -608,6 +615,20 @@ export type CourseUpdateOneRequiredWithoutPurchasesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CourseUpdateToOneWithWhereWithoutPurchasesInput, Prisma.CourseUpdateWithoutPurchasesInput>, Prisma.CourseUncheckedUpdateWithoutPurchasesInput>
 }
 
+export type CourseCreateNestedOneWithoutPaymentsInput = {
+  create?: Prisma.XOR<Prisma.CourseCreateWithoutPaymentsInput, Prisma.CourseUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.CourseCreateOrConnectWithoutPaymentsInput
+  connect?: Prisma.CourseWhereUniqueInput
+}
+
+export type CourseUpdateOneRequiredWithoutPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.CourseCreateWithoutPaymentsInput, Prisma.CourseUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.CourseCreateOrConnectWithoutPaymentsInput
+  upsert?: Prisma.CourseUpsertWithoutPaymentsInput
+  connect?: Prisma.CourseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CourseUpdateToOneWithWhereWithoutPaymentsInput, Prisma.CourseUpdateWithoutPaymentsInput>, Prisma.CourseUncheckedUpdateWithoutPaymentsInput>
+}
+
 export type CourseCreateWithoutCategoryInput = {
   id?: string
   userId: string
@@ -621,6 +642,7 @@ export type CourseCreateWithoutCategoryInput = {
   chapters?: Prisma.ChapterCreateNestedManyWithoutCourseInput
   attachment?: Prisma.AttachmentCreateNestedManyWithoutCourseInput
   purchases?: Prisma.PurchaseCreateNestedManyWithoutCourseInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCourseInput
 }
 
 export type CourseUncheckedCreateWithoutCategoryInput = {
@@ -636,6 +658,7 @@ export type CourseUncheckedCreateWithoutCategoryInput = {
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutCourseInput
   attachment?: Prisma.AttachmentUncheckedCreateNestedManyWithoutCourseInput
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutCourseInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCourseInput
 }
 
 export type CourseCreateOrConnectWithoutCategoryInput = {
@@ -693,6 +716,7 @@ export type CourseCreateWithoutAttachmentInput = {
   category?: Prisma.CategoryCreateNestedOneWithoutCoursesInput
   chapters?: Prisma.ChapterCreateNestedManyWithoutCourseInput
   purchases?: Prisma.PurchaseCreateNestedManyWithoutCourseInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCourseInput
 }
 
 export type CourseUncheckedCreateWithoutAttachmentInput = {
@@ -708,6 +732,7 @@ export type CourseUncheckedCreateWithoutAttachmentInput = {
   updateAt?: Date | string
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutCourseInput
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutCourseInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCourseInput
 }
 
 export type CourseCreateOrConnectWithoutAttachmentInput = {
@@ -739,6 +764,7 @@ export type CourseUpdateWithoutAttachmentInput = {
   category?: Prisma.CategoryUpdateOneWithoutCoursesNestedInput
   chapters?: Prisma.ChapterUpdateManyWithoutCourseNestedInput
   purchases?: Prisma.PurchaseUpdateManyWithoutCourseNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseUncheckedUpdateWithoutAttachmentInput = {
@@ -754,6 +780,7 @@ export type CourseUncheckedUpdateWithoutAttachmentInput = {
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutCourseNestedInput
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutCourseNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseCreateWithoutChaptersInput = {
@@ -769,6 +796,7 @@ export type CourseCreateWithoutChaptersInput = {
   category?: Prisma.CategoryCreateNestedOneWithoutCoursesInput
   attachment?: Prisma.AttachmentCreateNestedManyWithoutCourseInput
   purchases?: Prisma.PurchaseCreateNestedManyWithoutCourseInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCourseInput
 }
 
 export type CourseUncheckedCreateWithoutChaptersInput = {
@@ -784,6 +812,7 @@ export type CourseUncheckedCreateWithoutChaptersInput = {
   updateAt?: Date | string
   attachment?: Prisma.AttachmentUncheckedCreateNestedManyWithoutCourseInput
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutCourseInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCourseInput
 }
 
 export type CourseCreateOrConnectWithoutChaptersInput = {
@@ -815,6 +844,7 @@ export type CourseUpdateWithoutChaptersInput = {
   category?: Prisma.CategoryUpdateOneWithoutCoursesNestedInput
   attachment?: Prisma.AttachmentUpdateManyWithoutCourseNestedInput
   purchases?: Prisma.PurchaseUpdateManyWithoutCourseNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseUncheckedUpdateWithoutChaptersInput = {
@@ -830,6 +860,7 @@ export type CourseUncheckedUpdateWithoutChaptersInput = {
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachment?: Prisma.AttachmentUncheckedUpdateManyWithoutCourseNestedInput
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutCourseNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseCreateWithoutPurchasesInput = {
@@ -845,6 +876,7 @@ export type CourseCreateWithoutPurchasesInput = {
   category?: Prisma.CategoryCreateNestedOneWithoutCoursesInput
   chapters?: Prisma.ChapterCreateNestedManyWithoutCourseInput
   attachment?: Prisma.AttachmentCreateNestedManyWithoutCourseInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCourseInput
 }
 
 export type CourseUncheckedCreateWithoutPurchasesInput = {
@@ -860,6 +892,7 @@ export type CourseUncheckedCreateWithoutPurchasesInput = {
   updateAt?: Date | string
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutCourseInput
   attachment?: Prisma.AttachmentUncheckedCreateNestedManyWithoutCourseInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCourseInput
 }
 
 export type CourseCreateOrConnectWithoutPurchasesInput = {
@@ -891,6 +924,7 @@ export type CourseUpdateWithoutPurchasesInput = {
   category?: Prisma.CategoryUpdateOneWithoutCoursesNestedInput
   chapters?: Prisma.ChapterUpdateManyWithoutCourseNestedInput
   attachment?: Prisma.AttachmentUpdateManyWithoutCourseNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseUncheckedUpdateWithoutPurchasesInput = {
@@ -906,6 +940,87 @@ export type CourseUncheckedUpdateWithoutPurchasesInput = {
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutCourseNestedInput
   attachment?: Prisma.AttachmentUncheckedUpdateManyWithoutCourseNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCourseNestedInput
+}
+
+export type CourseCreateWithoutPaymentsInput = {
+  id?: string
+  userId: string
+  title: string
+  description?: string | null
+  imageUrl?: string | null
+  price?: number | null
+  isPublished?: boolean
+  createdAt?: Date | string
+  updateAt?: Date | string
+  category?: Prisma.CategoryCreateNestedOneWithoutCoursesInput
+  chapters?: Prisma.ChapterCreateNestedManyWithoutCourseInput
+  attachment?: Prisma.AttachmentCreateNestedManyWithoutCourseInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutCourseInput
+}
+
+export type CourseUncheckedCreateWithoutPaymentsInput = {
+  id?: string
+  userId: string
+  title: string
+  description?: string | null
+  imageUrl?: string | null
+  price?: number | null
+  isPublished?: boolean
+  categoryId?: string | null
+  createdAt?: Date | string
+  updateAt?: Date | string
+  chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutCourseInput
+  attachment?: Prisma.AttachmentUncheckedCreateNestedManyWithoutCourseInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutCourseInput
+}
+
+export type CourseCreateOrConnectWithoutPaymentsInput = {
+  where: Prisma.CourseWhereUniqueInput
+  create: Prisma.XOR<Prisma.CourseCreateWithoutPaymentsInput, Prisma.CourseUncheckedCreateWithoutPaymentsInput>
+}
+
+export type CourseUpsertWithoutPaymentsInput = {
+  update: Prisma.XOR<Prisma.CourseUpdateWithoutPaymentsInput, Prisma.CourseUncheckedUpdateWithoutPaymentsInput>
+  create: Prisma.XOR<Prisma.CourseCreateWithoutPaymentsInput, Prisma.CourseUncheckedCreateWithoutPaymentsInput>
+  where?: Prisma.CourseWhereInput
+}
+
+export type CourseUpdateToOneWithWhereWithoutPaymentsInput = {
+  where?: Prisma.CourseWhereInput
+  data: Prisma.XOR<Prisma.CourseUpdateWithoutPaymentsInput, Prisma.CourseUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type CourseUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.CategoryUpdateOneWithoutCoursesNestedInput
+  chapters?: Prisma.ChapterUpdateManyWithoutCourseNestedInput
+  attachment?: Prisma.AttachmentUpdateManyWithoutCourseNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutCourseNestedInput
+}
+
+export type CourseUncheckedUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chapters?: Prisma.ChapterUncheckedUpdateManyWithoutCourseNestedInput
+  attachment?: Prisma.AttachmentUncheckedUpdateManyWithoutCourseNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseCreateManyCategoryInput = {
@@ -933,6 +1048,7 @@ export type CourseUpdateWithoutCategoryInput = {
   chapters?: Prisma.ChapterUpdateManyWithoutCourseNestedInput
   attachment?: Prisma.AttachmentUpdateManyWithoutCourseNestedInput
   purchases?: Prisma.PurchaseUpdateManyWithoutCourseNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseUncheckedUpdateWithoutCategoryInput = {
@@ -948,6 +1064,7 @@ export type CourseUncheckedUpdateWithoutCategoryInput = {
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutCourseNestedInput
   attachment?: Prisma.AttachmentUncheckedUpdateManyWithoutCourseNestedInput
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutCourseNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseUncheckedUpdateManyWithoutCategoryInput = {
@@ -971,12 +1088,14 @@ export type CourseCountOutputType = {
   chapters: number
   attachment: number
   purchases: number
+  payments: number
 }
 
 export type CourseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   chapters?: boolean | CourseCountOutputTypeCountChaptersArgs
   attachment?: boolean | CourseCountOutputTypeCountAttachmentArgs
   purchases?: boolean | CourseCountOutputTypeCountPurchasesArgs
+  payments?: boolean | CourseCountOutputTypeCountPaymentsArgs
 }
 
 /**
@@ -1010,6 +1129,13 @@ export type CourseCountOutputTypeCountPurchasesArgs<ExtArgs extends runtime.Type
   where?: Prisma.PurchaseWhereInput
 }
 
+/**
+ * CourseCountOutputType without action
+ */
+export type CourseCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
+
 
 export type CourseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1026,6 +1152,7 @@ export type CourseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   chapters?: boolean | Prisma.Course$chaptersArgs<ExtArgs>
   attachment?: boolean | Prisma.Course$attachmentArgs<ExtArgs>
   purchases?: boolean | Prisma.Course$purchasesArgs<ExtArgs>
+  payments?: boolean | Prisma.Course$paymentsArgs<ExtArgs>
   _count?: boolean | Prisma.CourseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["course"]>
 
@@ -1050,6 +1177,7 @@ export type CourseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   chapters?: boolean | Prisma.Course$chaptersArgs<ExtArgs>
   attachment?: boolean | Prisma.Course$attachmentArgs<ExtArgs>
   purchases?: boolean | Prisma.Course$purchasesArgs<ExtArgs>
+  payments?: boolean | Prisma.Course$paymentsArgs<ExtArgs>
   _count?: boolean | Prisma.CourseCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1060,6 +1188,7 @@ export type $CoursePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     chapters: Prisma.$ChapterPayload<ExtArgs>[]
     attachment: Prisma.$AttachmentPayload<ExtArgs>[]
     purchases: Prisma.$PurchasePayload<ExtArgs>[]
+    payments: Prisma.$PaymentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1416,6 +1545,7 @@ export interface Prisma__CourseClient<T, Null = never, ExtArgs extends runtime.T
   chapters<T extends Prisma.Course$chaptersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Course$chaptersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   attachment<T extends Prisma.Course$attachmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Course$attachmentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   purchases<T extends Prisma.Course$purchasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Course$purchasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  payments<T extends Prisma.Course$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Course$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1891,6 +2021,30 @@ export type Course$purchasesArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.PurchaseScalarFieldEnum | Prisma.PurchaseScalarFieldEnum[]
+}
+
+/**
+ * Course.payments
+ */
+export type Course$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
 }
 
 /**

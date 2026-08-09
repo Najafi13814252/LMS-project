@@ -1,9 +1,30 @@
-function CourseIdPage() {
-  return (
-    <div>
-      
-    </div>
-  )
+import { prisma } from "@/lib/prisma"
+import { redirect } from "next/navigation"
+
+async function CourseIdPage({ params }: { params: Promise<{ courseId: string }> }) {
+  const { courseId } = await params
+
+  const course = await prisma.course.findUnique({
+    where: {
+      id: courseId
+    },
+    include: {
+      chapters: {
+        where: {
+          isPublished: true
+        },
+        orderBy: {
+          position: "asc"
+        }
+      }
+    }
+  })
+
+  if (!course) {
+    return redirect('/')
+  }
+
+  return redirect(`/courses/${course.id}/chapters/${course.chapters[0].id}`)
 }
 
 export default CourseIdPage

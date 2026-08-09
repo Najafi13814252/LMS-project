@@ -72,7 +72,7 @@ export type UserProgress = Prisma.UserProgressModel
  */
 export type Purchase = Prisma.PurchaseModel
 /**
- * Model StripeCustomer
+ * Model Payment
  * 
  */
-export type StripeCustomer = Prisma.StripeCustomerModel
+export type Payment = Prisma.PaymentModel

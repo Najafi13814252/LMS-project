@@ -33,6 +33,7 @@ model Course {
   chapters   Chapter[]
   attachment Attachment[]
   purchases  Purchase[]
+  payments   Payment[]
 
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
@@ -102,11 +103,30 @@ model Purchase {
   @@index([courseId])
 }
 
-model StripeCustomer {
-  id               String @id @default(uuid())
-  userId           String @unique
-  stripeCustomerId String @unique
+model Payment {
+  id String @id @default(uuid())
+
+  userId String @db.VarChar(100)
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  amount Int
+
+  authority String?  @unique
+  refId     String?
+
+  status PaymentStatus @default(PENDING)
 
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([courseId])
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
 }

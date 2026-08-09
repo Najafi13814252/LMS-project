@@ -57,7 +57,7 @@ export const ModelName = {
   Chapter: 'Chapter',
   UserProgress: 'UserProgress',
   Purchase: 'Purchase',
-  StripeCustomer: 'StripeCustomer'
+  Payment: 'Payment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -151,15 +151,19 @@ export const PurchaseScalarFieldEnum = {
 export type PurchaseScalarFieldEnum = (typeof PurchaseScalarFieldEnum)[keyof typeof PurchaseScalarFieldEnum]
 
 
-export const StripeCustomerScalarFieldEnum = {
+export const PaymentScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  stripeCustomerId: 'stripeCustomerId',
+  courseId: 'courseId',
+  amount: 'amount',
+  authority: 'authority',
+  refId: 'refId',
+  status: 'status',
   createdAt: 'createdAt',
-  updateAt: 'updateAt'
+  updatedAt: 'updatedAt'
 } as const
 
-export type StripeCustomerScalarFieldEnum = (typeof StripeCustomerScalarFieldEnum)[keyof typeof StripeCustomerScalarFieldEnum]
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -237,11 +241,13 @@ export const PurchaseOrderByRelevanceFieldEnum = {
 export type PurchaseOrderByRelevanceFieldEnum = (typeof PurchaseOrderByRelevanceFieldEnum)[keyof typeof PurchaseOrderByRelevanceFieldEnum]
 
 
-export const StripeCustomerOrderByRelevanceFieldEnum = {
+export const PaymentOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
-  stripeCustomerId: 'stripeCustomerId'
+  courseId: 'courseId',
+  authority: 'authority',
+  refId: 'refId'
 } as const
 
-export type StripeCustomerOrderByRelevanceFieldEnum = (typeof StripeCustomerOrderByRelevanceFieldEnum)[keyof typeof StripeCustomerOrderByRelevanceFieldEnum]
+export type PaymentOrderByRelevanceFieldEnum = (typeof PaymentOrderByRelevanceFieldEnum)[keyof typeof PaymentOrderByRelevanceFieldEnum]
 

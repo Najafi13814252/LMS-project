@@ -41,7 +41,7 @@ function CourseSidebarItem({ id, label, isCompleted, courseId, isLocked }: Cours
             </div>
 
             <div className={cn(
-                "ml-auto opacity-0 border-2 border-slate-700 h-full transition-all",
+                "mr-auto opacity-0 border-2 border-slate-700 rounded-r h-full transition-all",
                 isActive && "opacity-100",
                 isCompleted && "border-emerald-700"
             )}></div>

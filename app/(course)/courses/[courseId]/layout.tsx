@@ -50,7 +50,7 @@ async function CourseLayout({ children, params }: { children: ReactNode, params:
                 <CourseSidebar course={course} progressCount={progressCount} />
             </div>
 
-            <main className="md:pl-80 pt-20 h-full">
+            <main className="md:pr-80 pt-20 h-full">
                 {children}
             </main>
         </div>
