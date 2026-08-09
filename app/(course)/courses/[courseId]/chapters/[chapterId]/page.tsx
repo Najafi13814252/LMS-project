@@ -68,7 +68,7 @@ async function ChapterIdPage({ params }: { params: Promise<{ courseId: string, c
               <Separator />
               <div>
                 {attachment.map(attach => (
-                  <a href={attach.url} target="_blank" key={attach.id} className="fle items-center p-3 w-full bg-lime-200 border-dashed text-lime-700 rounded-md hover:underline">
+                  <a href={attach.url} target="_blank" key={attach.id} className="flex items-center p-3 w-full bg-lime-100 border border-dashed border-lime-600 text-lime-600 gap-x-2 rounded-md hover:underline">
                     <HugeiconsIcon icon={File} />
                     <p className="line-clamp-1">{attach.name}</p>
                   </a>

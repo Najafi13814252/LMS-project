@@ -77,8 +77,9 @@ export async function POST(
         // --------------------------------
         // 5. Check price
         // --------------------------------
+        const amount = Math.round(course.price!)
 
-        if (!course.price) {
+        if (!amount) {
             return NextResponse.json(
                 {
                     message: "This course is free",
@@ -122,7 +123,7 @@ export async function POST(
         // --------------------------------
 
         const callbackUrl =
-            `${process.env.NEXT_PUBLIC_APP_URL}/courses/${courseId}`
+            `${process.env.NEXT_PUBLIC_APP_URL}/api/payment/zarinpal/callback`
 
 
         // --------------------------------
@@ -130,7 +131,7 @@ export async function POST(
         // --------------------------------
 
         const result = await requestPayment({
-            amount: course.price,
+            amount,
             description: `Purchase course: ${course.title}`,
             callbackUrl,
             email,
@@ -164,7 +165,7 @@ export async function POST(
             data: {
                 userId,
                 courseId,
-                amount: course.price,
+                amount,
                 authority,
                 status: "PENDING",
             },
