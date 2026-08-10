@@ -1,6 +1,5 @@
 import { getDashboardCourses } from "@/actions/get-dashboard-courses";
 import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 import CoursesList from "../search/_components/CoursesList";
 import InfoCard from "./_components/InfoCard";
 import { CheckCircle, Clock } from "@hugeicons/core-free-icons";
@@ -8,9 +7,7 @@ import { CheckCircle, Clock } from "@hugeicons/core-free-icons";
 export default async function Home() {
   const { userId } = await auth()
 
-  if (!userId) redirect('/')
-
-  const { completedCourses, coursesInProgress } = await getDashboardCourses(userId)
+  const { completedCourses, coursesInProgress } = await getDashboardCourses(userId!)
 
   return (
     <div className="p-6 space-y-4">

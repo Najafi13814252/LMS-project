@@ -35,14 +35,14 @@ function NavbarRotes() {
                     </Link>
 
                 ) : (
-                    <Link href="/teacher/courses">
-                        <Button size="sm" variant="ghost">پنل معلم</Button>
-                    </Link>
-                    //     isteacher(userId!) ? (
                     // <Link href="/teacher/courses">
                     //     <Button size="sm" variant="ghost">پنل معلم</Button>
                     // </Link>
-                    // ) : null
+                    isteacher(userId!) ? (
+                        <Link href="/teacher/courses">
+                            <Button size="sm" variant="ghost">پنل معلم</Button>
+                        </Link>
+                    ) : null
                 )}
 
                 {/* Auth buttons */}
