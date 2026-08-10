@@ -28,7 +28,7 @@ function CourseEnrollButton({ courseId, price }: CourseEnrollButtonProps) {
     }
     return (
         <Button disabled={isPending} onClick={handlePayment} className="w-full md:w-fit"> 
-            {isPending ? 'درحال انتقال به صفحه پرداخت...' : `${price.toLocaleString('fa-ir')} تومان`}
+            {isPending ? 'درحال انتقال به صفحه پرداخت...' : `خرید این دوره با پرداخت ${price.toLocaleString('fa-ir')} تومان`}
         </Button>
     )
 }

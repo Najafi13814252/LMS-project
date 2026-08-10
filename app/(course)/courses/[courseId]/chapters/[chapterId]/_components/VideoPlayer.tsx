@@ -3,7 +3,10 @@
 import { cn } from "@/lib/utils"
 import { CircleLock02Icon, Loader } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
+import axios from "axios"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
+import toast from "react-hot-toast"
 
 interface VideoPlayerProps {
     chapterId: string
@@ -17,6 +20,27 @@ interface VideoPlayerProps {
 
 function VideoPlayer({ chapterId, title, courseId, videoUrl, nextChapterId, isLocked, completedOnEnd }: VideoPlayerProps) {
     const [isReady, setIsReady] = useState(false)
+    const router = useRouter()
+
+    const onEnd = async () => {
+        try {
+            if (completedOnEnd) {
+                await axios.put(`/api/courses/${courseId}/chapters/${chapterId}/progress`, {
+                    isComplated: true
+                })
+
+                toast.success("مشاهده فصل بروز شد")
+                router.refresh()
+
+                if (nextChapterId) {
+                    router.push(`/courses/${courseId}/chapters/${nextChapterId}`)
+                }
+            }
+        } catch {
+            toast.error("خطایی رخ داده است")
+        }
+    }
+
     return (
         <div className="relative aspect-video">
             {!isLocked && !isReady && (
@@ -35,7 +59,7 @@ function VideoPlayer({ chapterId, title, courseId, videoUrl, nextChapterId, isLo
                     !isReady && "hidden"
                 )}
                     onCanPlay={() => setIsReady(true)}
-                    onEnded={() => {}}
+                    onEnded={onEnd}
                     title={title}
                     autoPlay
                 >

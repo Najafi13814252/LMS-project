@@ -2,12 +2,14 @@ import { getChapter } from "@/actions/get-chapter"
 import Banner from "@/components/custom/Banner"
 import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
-import VideoPlayer from "./_components/VideoPlayer"
 import CourseEnrollButton from "./_components/CourseEnrollButton"
 import { Separator } from "@/components/ui/separator"
 import DOMPurify from "isomorphic-dompurify"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { File } from "@hugeicons/core-free-icons"
+import dynamic from "next/dynamic"
+import CourseProgressButton from "./_components/CourseProgressButton"
+const VideoPlayer = dynamic(() => import("./_components/VideoPlayer"))
 
 async function ChapterIdPage({ params }: { params: Promise<{ courseId: string, chapterId: string }> }) {
   const { chapterId, courseId } = await params
@@ -28,14 +30,14 @@ async function ChapterIdPage({ params }: { params: Promise<{ courseId: string, c
   const completeOnEnd = !!purchase && !userProgress?.isComplated
 
   return (
-    <div className="">
+    <div>
       {userProgress?.isComplated && (
-        <Banner label="شما قبلا این فصل را تکمیل کرده‌اید" variant="success" />
+        <Banner label="شما قبلا این فصل را مشاهده کرده‌اید" variant="success" />
       )}
       {isLocked && (
         <Banner label="برای تماشای این فصل باید دوره را خریداری کنید" variant="warning" />
       )}
-      <div className="flex flex-col max-w-2xl mx-auto pb-20 px-4 pt-4 gap-y-4">
+      <div className="flex flex-col max-w-2xl mx-auto px-4 pt-4 gap-y-4">
         <VideoPlayer
           chapterId={chapterId}
           title={chapter.title}
@@ -48,9 +50,14 @@ async function ChapterIdPage({ params }: { params: Promise<{ courseId: string, c
 
         <div className="flex flex-col gap-y-4">
           <div className="flex flex-col md:flex md:flex-row items-center justify-between">
-            <h2 className="text-2xl font-semibold mb-2">{chapter.title}</h2>
+            <h2 className="text-2xl font-semibold mb-2 md:mb-0">{chapter.title}</h2>
             {purchase ? (
-              <div></div>
+              <CourseProgressButton 
+                chapterId={chapterId}
+                courseId={courseId}
+                nextChapterId={nextChapter?.id || ""}
+                isCompleted={!!userProgress?.isComplated}
+                />
             ) : (
               <CourseEnrollButton
                 courseId={courseId}

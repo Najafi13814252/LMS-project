@@ -1,15 +1,18 @@
 "use client"
 
 import { Button, buttonVariants } from "@/components/ui/button"
-import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
+import { Show, SignInButton, SignUpButton, useAuth, UserButton } from "@clerk/nextjs"
 import { Logout } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import SearchInput from "./SearchInput"
+import { isteacher } from "@/lib/teacher"
 
 function NavbarRotes() {
     const pathname = usePathname()
+
+    const { userId } = useAuth()
 
     const isTeacherPage = pathname?.startsWith('/teacher')
     const isCoursePage = pathname?.startsWith('/courses')
@@ -33,8 +36,13 @@ function NavbarRotes() {
 
                 ) : (
                     <Link href="/teacher/courses">
-                        <Button size="sm" variant="ghost">Teacher mode</Button>
+                        <Button size="sm" variant="ghost">پنل معلم</Button>
                     </Link>
+                    //     isteacher(userId!) ? (
+                    // <Link href="/teacher/courses">
+                    //     <Button size="sm" variant="ghost">پنل معلم</Button>
+                    // </Link>
+                    // ) : null
                 )}
 
                 {/* Auth buttons */}

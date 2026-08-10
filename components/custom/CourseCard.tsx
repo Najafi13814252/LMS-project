@@ -2,6 +2,7 @@ import { BookOpen } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import Image from "next/image"
 import Link from "next/link"
+import CourseProgress from "./CourseProgress"
 
 interface CourseCardProps {
     id: string
@@ -36,7 +37,7 @@ function CourseCard({ id, title, imageUrl, chaptersLength, price, progress, cate
                     </div>
 
                     { progress !== null ? (
-                        <div></div>
+                        <CourseProgress size="sm" value={progress} variant={progress === 100 ? 'success' : 'default'}/>
                     ) : (
                         <p className="text-md md:text-sm font-medium text-slate-600">{price.toLocaleString('fa-ir')} تومان</p>
                     )}
