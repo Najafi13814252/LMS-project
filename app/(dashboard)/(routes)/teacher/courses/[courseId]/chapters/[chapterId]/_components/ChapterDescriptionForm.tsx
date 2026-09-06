@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Field, FieldError, FieldGroup } from "@/components/ui/field"
-import { MinimalTiptapEditor } from "@/components/ui/minimal-tiptap"
+import { RichTextEditor } from "@/components/ui/rich-text-editor/rich-text-editor"
 import { Chapter } from "@/lib/generated/prisma/client"
 import { cn } from "@/lib/utils"
 import { descriptionCourseSchema } from "@/schemas/create-course"
@@ -80,11 +80,10 @@ function ChapterDescriptionForm({ initialData, courseId, chapterId }: Descriptio
                     <FieldGroup>
                         <Controller name="description" control={form.control} render={({ field, fieldState }) => (
                             <Field>
-                                <MinimalTiptapEditor
+                                <RichTextEditor
                                     {...field}
                                     className="w-full bg-white"
                                     editorContentClassName="p-5"
-                                    output="html"
                                     autofocus
                                     editable
                                     editorClassName="focus:outline-hidden"

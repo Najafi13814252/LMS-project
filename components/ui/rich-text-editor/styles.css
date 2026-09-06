@@ -1,0 +1,116 @@
+/* Content styles for the rich text editor (.rte-content is set on the ProseMirror element) */
+
+.rte-content {
+  outline: none;
+  min-height: 12rem;
+}
+
+.rte-content > :first-child {
+  margin-top: 0;
+}
+
+.rte-content > :last-child {
+  margin-bottom: 0;
+}
+
+.rte-content p {
+  margin: 0.4em 0;
+}
+
+.rte-content :is(h1, h2, h3) {
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 1em 0 0.4em;
+}
+
+.rte-content h1 {
+  font-size: 1.5rem;
+}
+
+.rte-content h2 {
+  font-size: 1.25rem;
+}
+
+.rte-content h3 {
+  font-size: 1.125rem;
+}
+
+.rte-content :is(ul, ol) {
+  margin: 0.4em 0;
+  padding-inline-start: 1.5rem;
+}
+
+.rte-content ul {
+  list-style: disc;
+}
+
+.rte-content ol {
+  list-style: decimal;
+}
+
+.rte-content li {
+  margin: 0.2em 0;
+}
+
+.rte-content li p {
+  margin: 0.2em 0;
+}
+
+.rte-content blockquote {
+  margin: 0.6em 0;
+  padding-inline-start: 1rem;
+  border-inline-start: 3px solid var(--border);
+  color: var(--muted-foreground);
+}
+
+.rte-content code {
+  padding: 0.1em 0.35em;
+  border-radius: 0.25rem;
+  background: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.rte-content pre {
+  margin: 0.6em 0;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--muted);
+  direction: ltr;
+  text-align: start;
+}
+
+.rte-content pre code {
+  padding: 0;
+  background: none;
+  font-size: 0.875em;
+}
+
+.rte-content hr {
+  margin: 1.25em 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+.rte-content a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: text;
+}
+
+.rte-content [data-placeholder]::before {
+  content: attr(data-placeholder);
+  float: inline-start;
+  height: 0;
+  pointer-events: none;
+  color: var(--muted-foreground);
+}
+
+.rte-content ::selection {
+  background: var(--accent);
+}
